@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Two charts comparing BLS apparel CPI observations for New York and Dallas, 2024–2026.">
+  <title>Apparel CPI / New York + Dallas</title>
+  <style>
+    :root{color-scheme:light;--ink:#172026;--muted:#627078;--paper:#f2f3ee;--card:#fff;--line:#d9dfdc;--ny:#d35e42;--dal:#317c74;--accent:#c2a65f}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 "Segoe UI",Arial,sans-serif}
+    a{color:inherit}
+    .shell{max-width:1160px;margin:auto;padding:30px 28px 54px}
+    header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:2px 0 18px}
+    .back{font-size:.82rem;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;color:var(--muted)}
+    .brand{font-size:.82rem;font-weight:800;letter-spacing:.18em}
+    .eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:700}
+    h1{font:500 clamp(2.5rem,6vw,5rem)/.98 Georgia,serif;letter-spacing:-.045em;margin:24px 0 16px;max-width:850px}
+    h1 em{color:var(--dal);font-weight:400}
+    .intro{max-width:730px;color:#4c5a60;font-size:1.05rem}
+    .summary{display:flex;flex-wrap:wrap;gap:12px;margin:25px 0 36px}
+    .pill{background:#e6e9e2;border:1px solid #d6dcd3;border-radius:30px;padding:8px 13px;font-size:.78rem;color:#435058}
+    .viz{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 26px 22px;margin:20px 0 24px;box-shadow:0 12px 30px rgba(32,45,45,.045)}
+    .viz-head{display:flex;gap:24px;justify-content:space-between;align-items:flex-start}
+    .viz-number{color:var(--accent);font-weight:800;letter-spacing:.12em;font-size:.72rem}
+    h2{font:500 clamp(1.6rem,3vw,2.35rem)/1.12 Georgia,serif;margin:6px 0 8px}
+    .sub{color:var(--muted);margin:0;max-width:760px}
+    .chart-wrap{width:100%;overflow-x:auto;margin-top:17px}
+    svg{display:block;width:100%;min-width:700px;height:auto;overflow:visible}
+    .axis{stroke:#acb8b5;stroke-width:1}
+    .grid{stroke:#e5e9e5;stroke-width:1}
+    .tick-label{fill:#69767b;font:12px "Segoe UI",Arial,sans-serif}
+    .axis-label{fill:#49575d;font:12px "Segoe UI",Arial,sans-serif}
+    .series-ny{stroke:var(--ny);fill:var(--ny)}
+    .series-dal{stroke:var(--dal);fill:var(--dal)}
+    .trend-line{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+    .marker{stroke:#fff;stroke-width:1.5;cursor:help}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .toggle{border:1px solid var(--line);background:#fff;border-radius:28px;padding:8px 12px;font:600 .8rem "Segoe UI",Arial,sans-serif;cursor:pointer;color:var(--ink)}
+    .toggle[aria-pressed="false"]{opacity:.48;text-decoration:line-through}
+    .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+    .ny-dot{background:var(--ny)}.dal-dot{background:var(--dal)}
+    .chart-note{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+    .means{font:12px "Segoe UI",Arial,sans-serif;fill:var(--ink)}
+    .callout{fill:#f6f0dc;stroke:#e7d9aa}
+    .insight{border-left:3px solid var(--accent);padding:12px 16px;margin:20px 0 0;color:#405057;background:#faf8f0}
+    .insight strong{color:var(--ink)}
+    .caveat{font-size:.88rem;color:var(--muted);max-width:900px;margin:22px 0}
+    footer{border-top:1px solid var(--line);padding-top:17px;color:var(--muted);font-size:.78rem;display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+    @media(max-width:700px){.shell{padding:18px 15px 35px}.viz{padding:18px 14px}.viz-head{display:block}.controls{justify-content:flex-start;margin-top:14px}.summary{margin-bottom:24px}}
+    @media print{body{background:#fff}.shell{max-width:none;padding:0}.viz{box-shadow:none;break-inside:avoid}.toggle,.back{display:none}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header><a class="back" href="index.html">← Back to Swyft</a><span class="brand">SWYFT / DATA NOTE 01</span></header>
+    <p class="eyebrow">Fashion prices · BLS CPI-U · Apparel</p>
+    <h1>Two cities.<br><em>One apparel index.</em></h1>
+    <p class="intro">These charts use published BLS apparel CPI observations for New York–Newark–Jersey City and Dallas–Fort Worth–Arlington. The index shows price change over time; it is not a direct comparison of clothing price levels between cities.</p>
+    <div class="summary" aria-label="Data summary">
+      <span class="pill">Jan 2024 — Sep 2026</span><span class="pill">Not seasonally adjusted</span><span class="pill">All Urban Consumers (CPI-U)</span><span class="pill">Age group is not available in CPI</span>
+    </div>
+
+    <section class="viz" aria-labelledby="trend-heading">
+      <div class="viz-head">
+        <div><span class="viz-number">VISUALIZATION 01 / TREND</span><h2 id="trend-heading">Apparel CPI over time</h2><p class="sub">New York is reported monthly. Dallas is reported every two months, so its line connects the observations available at those intervals.</p></div>
+        <div class="controls" aria-label="Toggle chart series">
+          <button class="toggle" id="toggle-ny" aria-pressed="true"><span class="dot ny-dot"></span>New York</button>
+          <button class="toggle" id="toggle-dal" aria-pressed="true"><span class="dot dal-dot"></span>Dallas</button>
+        </div>
+      </div>
+      <div class="chart-wrap"><svg id="trend-chart" viewBox="0 0 1000 430" role="img" aria-labelledby="trend-title trend-desc"><title id="trend-title">Apparel CPI trend for New York and Dallas, January 2024 to September 2026</title><desc id="trend-desc">Interactive line chart. Use the buttons to show or hide either metro area.</desc></svg></div>
+      <p class="chart-note">Hover or focus a point to see its date and index value. Missing October 2025 data in New York is left blank.</p>
+    </section>
+
+    <section class="viz" aria-labelledby="means-heading">
+      <span class="viz-number">VISUALIZATION 02 / GROUP COMPARISON</span>
+      <h2 id="means-heading">Average index in matched periods</h2>
+      <p class="sub">Both cities are compared only in the 17 periods where each has a published observation (January 2024–September 2026).</p>
+      <div class="chart-wrap"><svg id="means-chart" viewBox="0 0 1000 300" role="img" aria-labelledby="means-title means-desc"><title id="means-title">Mean apparel CPI in matched observation periods</title><desc id="means-desc">The New York mean is 130.671. The Dallas mean is 121.868. The difference is 8.803 index points.</desc></svg></div>
+      <p class="insight"><strong>Most interesting pattern:</strong> New York’s apparel index averaged about <strong>8.8 index points higher</strong> than Dallas’s across the matched dates. The two lines also move up and down over time, with Dallas observed less often.</p>
+    </section>
+
+    <p class="caveat"><strong>How to read this:</strong> CPI area indexes measure changes relative to a base period and do not indicate that clothing is literally 8.8 points or a fixed amount more expensive in one city. This is a descriptive comparison, not a statistical significance test. CPI does not include an age 20–35 breakdown.</p>
+    <footer>
+      <span>Source: U.S. Bureau of Labor Statistics, Public Data API v1.</span>
+      <span><a href="https://api.bls.gov/publicAPI/v1/timeseries/data/CUURS12ASAA">New York series</a> · <a href="https://api.bls.gov/publicAPI/v1/timeseries/data/CUURS37ASAA">Dallas series</a></span>
+      <span>Series: CUURS12ASAA · CUURS37ASAA</span>
+    </footer>
+  </main>
+<script>
+const ny = [
+["2024-01",131.085],["2024-02",130.345],["2024-03",133.315],["2024-04",132.696],["2024-05",132.355],["2024-06",132.820],["2024-07",126.531],["2024-08",133.004],["2024-09",139.802],["2024-10",132.590],["2024-11",125.464],["2024-12",121.950],
+["2025-01",129.782],["2025-02",129.286],["2025-03",132.198],["2025-04",130.240],["2025-05",128.713],["2025-06",128.135],["2025-07",126.530],["2025-08",128.367],["2025-09",133.757],["2025-11",123.090],["2025-12",123.775],
+["2026-01",128.471],["2026-02",131.946],["2026-03",133.621],["2026-04",131.944],["2026-05",132.675],["2026-06",129.505],["2026-07",127.149],["2026-08",134.341],["2026-09",136.869]
+];
+const dallas = [
+["2024-01",118.180],["2024-03",120.598],["2024-05",118.404],["2024-07",118.153],["2024-09",128.414],["2024-11",116.840],
+["2025-01",116.894],["2025-03",124.156],["2025-05",125.530],["2025-07",122.590],["2025-09",126.838],["2025-11",114.623],
+["2026-01",115.303],["2026-03",128.043],["2026-05",128.720],["2026-07",121.643],["2026-09",126.834]
+];
+const svgNS="http://www.w3.org/2000/svg";
+const trend=document.getElementById("trend-chart");
+const W=1000,H=430,L=75,R=28,T=30,B=58, ymin=110,ymax=145;
+const start=new Date(Date.UTC(2024,0,1)), end=new Date(Date.UTC(2026,8,1));
+function el(name,attrs,text){const n=document.createElementNS(svgNS,name);Object.keys(attrs||{}).forEach(k=>n.setAttribute(k,attrs[k]));if(text!==undefined)n.textContent=text;return n}
+function dateX(key){const parts=key.split("-").map(Number);const d=new Date(Date.UTC(parts[0],parts[1]-1,1));return L+(d-start)/(end-start)*(W-L-R)}
+function valueY(v){return T+(ymax-v)/(ymax-ymin)*(H-T-B)}
+[110,115,120,125,130,135,140,145].forEach(v=>{const y=valueY(v);trend.append(el("line",{x1:L,y1:y,x2:W-R,y2:y,class:"grid"}));trend.append(el("text",{x:L-12,y:y+4,"text-anchor":"end",class:"tick-label"},String(v)))});
+trend.append(el("line",{x1:L,y1:T,x2:L,y2:H-B,class:"axis"}));trend.append(el("line",{x1:L,y1:H-B,x2:W-R,y2:H-B,class:"axis"}));
+const months=["Jan","Apr","Jul","Oct"];
+for(let y=2024;y<=2026;y++){months.forEach((m,i)=>{const month=i*3;if(y===2026&&month>6)return;const key=y+"-"+String(month+1).padStart(2,"0");const x=dateX(key);trend.append(el("line",{x1:x,y1:H-B,x2:x,y2:H-B+5,class:"axis"}));trend.append(el("text",{x:x,y:H-B+23,"text-anchor":"middle",class:"tick-label"},m+" "+String(y).slice(2)))})}
+trend.append(el("text",{x:20,y:(H-B+T)/2,transform:"rotate(-90 20 "+((H-B+T)/2)+")","text-anchor":"middle",class:"axis-label"},"CPI index (1982–84 = 100)"));
+function seriesGroup(data,cls,label){const g=el("g",{class:"series-layer "+cls,"aria-label":label});const path=data.map((p,i)=>(i?"L":"M")+dateX(p[0]).toFixed(2)+" "+valueY(p[1]).toFixed(2)).join(" ");g.append(el("path",{d:path,class:"trend-line "+cls}));data.forEach(p=>{const c=el("circle",{cx:dateX(p[0]),cy:valueY(p[1]),r:4.5,class:"marker "+cls,tabindex:"0"});c.append(el("title",{},label+" · "+p[0]+" · "+p[1].toFixed(3)));g.append(c)});return g}
+trend.append(seriesGroup(ny,"series-ny","New York"));trend.append(seriesGroup(dallas,"series-dal","Dallas"));
+function setVisible(id,cls){const b=document.getElementById(id);b.addEventListener("click",()=>{const show=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(show));trend.querySelectorAll("."+cls).forEach(n=>n.closest(".series-layer").style.display=show?"":"none")})}
+setVisible("toggle-ny","series-ny");setVisible("toggle-dal","series-dal");
+
+const means=document.getElementById("means-chart");
+const left=215,right=905,base=110,top=55,bottom=225;
+function mx(v){return left+(v-base)/(140-base)*(right-left)}
+[110,115,120,125,130,135,140].forEach(v=>{const x=mx(v);means.append(el("line",{x1:x,y1:top,x2:x,y2:bottom,class:"grid"}));means.append(el("text",{x:x,y:bottom+25,"text-anchor":"middle",class:"tick-label"},String(v)))});
+means.append(el("line",{x1:left,y1:bottom,x2:right,y2:bottom,class:"axis"}));
+means.append(el("text",{x:30,y:103,class:"axis-label"},"Dallas"));means.append(el("text",{x:30,y:183,class:"axis-label"},"New York"));
+const dMean=121.868, nMean=130.671, yD=100,yN=180;
+means.append(el("line",{x1:mx(dMean),y1:yD,x2:mx(nMean),y2:yN,stroke:"#c2a65f","stroke-width":"3"}));
+[[dMean,yD,"series-dal","121.868"],[nMean,yN,"series-ny","130.671"]].forEach(p=>{means.append(el("circle",{cx:mx(p[0]),cy:p[1],r:9,class:"marker "+p[2]}));means.append(el("text",{x:mx(p[0])+14,y:p[1]+5,class:"means"},p[3]))});
+const box=el("rect",{x:mx(dMean)+5,y:122,width:150,height:30,rx:15,class:"callout"});means.append(box);means.append(el("text",{x:mx(dMean)+80,y:142,"text-anchor":"middle",class:"means"},"+8.803 index points"));
+means.append(el("text",{x:(left+right)/2,y:280,"text-anchor":"middle",class:"axis-label"},"Matched-period mean apparel CPI (index points; axis begins at 110)"));
+</script>
+</body>
+</html>
