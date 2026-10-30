@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b12">
+  <meta name="description" content="Explore Swyft Monthly Preview + Style, the $6.99 per month plan for clothing previews and personalized style guidance.">
+  <title>Pricing — Swyft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="pricing-page">
+  <div class="page-grain" aria-hidden="true"></div>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="index.html#top" aria-label="Swyft home"><span class="mark">S</span><span>SWYFT</span></a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="index.html#experience">THE EXPERIENCE</a>
+      <a href="index.html#how-it-works">HOW IT WORKS</a>
+      <a href="index.html#audience">OUR POINT OF VIEW</a>
+      <a href="pricing.html" aria-current="page">PRICING</a>
+    </nav>
+    <a class="nav-cta" href="index.html#studio">EXPLORE THE STUDIO <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="pricing-hero" aria-labelledby="pricing-title">
+      <div class="pricing-intro">
+        <p class="eyebrow"><span class="live-dot"></span> SWYFT / THE PLAN</p>
+        <h1 id="pricing-title">Your style,<br><em>in one place.</em></h1>
+        <p class="pricing-lede">A monthly service concept pairing clothing previews with personalized style guidance.</p>
+      </div>
+
+      <article class="plan-card" aria-labelledby="plan-name">
+        <div class="plan-card-top">
+          <span class="plan-index">01 / MONTHLY</span>
+          <span class="plan-mark" aria-hidden="true">✳</span>
+        </div>
+        <p class="eyebrow">ONE PLAN</p>
+        <h2 id="plan-name">Swyft Monthly<br>Preview + Style</h2>
+        <p class="plan-description">Clothing previews and personalized style guidance, brought together in a single monthly plan.</p>
+        <div class="plan-price" aria-label="6 dollars and 99 cents per month">
+          <span class="currency">$</span><span class="amount">6.99</span><span class="period">/ month</span>
+        </div>
+        <a class="button button-primary plan-cta" href="index.html#studio">EXPLORE THE STYLE STUDIO <span aria-hidden="true">↗</span></a>
+        <p class="plan-note">Swyft is currently presented as a concept demo. This site does not start a subscription or take payment.</p>
+      </article>
+
+      <div class="pricing-footline"><span>PERSONAL STYLE SYSTEM / 001</span><a href="index.html#experience">DISCOVER THE SWYFT IDEA <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="wordmark" href="index.html#top"><span class="mark">S</span><span>SWYFT</span></a>
+    <p>BRIDGING DIGITAL & PHYSICAL STYLE.</p>
+    <a href="index.html#studio">STYLE STUDIO ↗</a>
+    <a href="index.html#top">BACK TO HOME ↑</a>
+    <small>CONCEPT WEBSITE · 2026</small>
+  </footer>
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.desktop-nav');
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      navigation.classList.toggle('open', !isOpen);
+    });
+    navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open menu');
+      navigation.classList.remove('open');
+    }));
+  </script>
+</body>
+</html>
