@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "venture3d.handoff/1.0",
+  "projectName": "Luma · retail display",
+  "modelName": "Luma — retail display",
+  "modelType": "retail-display",
+  "confirmedAt": "2026-11-03T20:09:07.767Z",
+  "dimensions": {
+    "width": 4.296,
+    "depth": 3.2,
+    "height": 3.08,
+    "unit": "meters",
+    "approximate": true
+  },
+  "preferredCamera": {
+    "projection": "perspective",
+    "preset": "isometric"
+  },
+  "presentation": {
+    "background": "#eeedf1",
+    "lighting": "soft"
+  },
+  "description": "A compact open-front apparel display with paired hanging rails, floating shelves, a central fitting mirror, accessories, and a warm wood platform.",
+  "concept": {
+    "type": "Service environment",
+    "targetDimensions": {
+      "width": 4.2,
+      "depth": 3.2,
+      "height": 2.8,
+      "unit": "m"
+    },
+    "geometryNote": "Editable procedural approximation; not an automatic image reconstruction."
+  },
+  "hotspots": [],
+  "files": {
+    "model": "model.glb",
+    "project": "project.json",
+    "preview": "preview.png",
+    "readme": "README.txt"
+  },
+  "integrity": {
+    "algorithm": "SHA-256",
+    "file": "model.glb",
+    "checksum": "b4c7fac7e231fb23d8e972fbb98fce9f0c402b0f324912800bbdaacaf7255982"
+  }
+}

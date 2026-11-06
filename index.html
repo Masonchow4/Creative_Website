@@ -10,7 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="showroom.css">
   <script src="script.js" defer></script>
+  <script type="importmap">
+    {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js"}}
+  </script>
+  <script type="module" src="showroom.js"></script>
 </head>
 <body>
   <div class="page-grain" aria-hidden="true"></div>
@@ -39,13 +44,24 @@
         </div>
         <div class="hero-proof"><div class="avatar-stack" aria-hidden="true"><i>J</i><i>M</i><i>A</i></div><span>Made for every style, coast to coast</span></div>
       </div>
-      <div class="hero-art" aria-label="Swyft virtual styling preview">
+      <div class="hero-art" aria-label="Swyft styling studio showroom">
         <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="hero-image"></div>
-        <div class="scan-line"></div>
+        <div class="showroom-viewer" id="showroom-viewer" data-state="fallback">
+          <img class="showroom-poster" src="assets/swyft-showroom-preview.png" alt="Confirmed Luma apparel showroom model, with clothing rails, shelves, and a central fitting mirror">
+          <canvas class="showroom-canvas" aria-hidden="true"></canvas>
+          <div class="showroom-loading" role="status" aria-live="polite">PREPARING THE SHOWROOM…</div>
+          <div class="showroom-controls" aria-label="3D showroom controls">
+            <span class="drag-cue">DRAG TO EXPLORE</span>
+            <button type="button" data-rotate="left" aria-label="Rotate showroom left">↶</button>
+            <button type="button" data-rotate="right" aria-label="Rotate showroom right">↷</button>
+            <button type="button" data-zoom="in" aria-label="Zoom in on the showroom">＋</button>
+            <button type="button" data-zoom="out" aria-label="Zoom out from the showroom">−</button>
+            <button type="button" data-reset aria-label="Reset showroom view">RESET</button>
+          </div>
+        </div>
         <div class="hero-label label-top"><span class="tiny-icon">✳</span><div><b>STYLE SCAN</b><small>PERSONALIZED TO YOU</small></div><span class="signal">● ● ●</span></div>
         <div class="hero-label label-bottom"><span class="label-check">✓</span><div><b>YOUR FIT, IN FOCUS</b><small>PREVIEW · REFINE · FEEL GOOD</small></div><span class="arrow-chip">↗</span></div>
-        <div class="hero-caption"><span>01 / SWYFT VIRTUAL TRY-ON</span><span>FIG. 001</span></div>
+        <div class="hero-caption"><span>01 / SWYFT STYLE STUDIO</span><span>LUMA · RETAIL DISPLAY</span></div>
         <div class="floating-tag">STYLE<br><strong>WITHOUT<br>THE MAYBE.</strong></div>
       </div>
       <div class="hero-bottomline"><span>FASHION MEETS INTELLIGENCE</span><span>SCROLL TO EXPLORE ↓</span></div>
